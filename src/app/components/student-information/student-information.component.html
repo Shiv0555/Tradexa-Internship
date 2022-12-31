@@ -1,0 +1,83 @@
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand">Data Information</a>
+     
+        <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#DataModal" (click)="onAddClick();">Add Student</button>
+ 
+    </div>
+  </nav>
+
+ <div class="container mt-2">
+    <table class="table table-hover table-striped table-responsive">
+        <thead>
+            <tr>
+                <th>User Id</th>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Body</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of DataDetails">
+                <td>{{item.userId}}</td>
+                <td>{{item.id}}</td>
+                <td>{{item.title}}</td>
+                <td>{{item.body}}</td>
+                <td>
+                    <button (click)="edit(item)" data-bs-toggle="modal" data-bs-target="#DataModal" class="btn btn-sm btn-warning text-white mx-2">Edit</button> |
+                    <button (click)="deleteDataDetail(item.id)" class="btn btn-sm btn-danger">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+ </div> 
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="DataModal" tabindex="-1" aria-labelledby="DataModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="DataModalLabel">Data Information</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="Data">
+                <div class="mb-3">
+                    <label  class="form-label">UserId</label>
+                    <input type="text" class="form-control"  placeholder="userId" formControlName="userid">
+                  </div>
+    
+                  <div class="mb-3">
+                    <label  class="form-label">Id</label>
+                    <input type="text" class="form-control"  placeholder="Id" formControlName="id">
+                  </div>
+    
+                  
+                  <div class="mb-3">
+                    <label  class="form-label">Title</label>
+                    <input type="text" class="form-control"  placeholder="title" formControlName="title">
+                  </div>
+    
+                  
+                  <div class="mb-3">
+                    <label  class="form-label">Body</label>
+                    <input type="text" class="form-control"  placeholder="Body" formControlName="body">
+                  </div>
+
+            </form>
+            
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close" (click)="reset();">Close</button>
+          <button type="button" class="btn btn-primary" (click)="updateDataDetails()" *ngIf="showUpdateBtn">Update Student</button>
+
+          <button type="button" class="btn btn-success" (click)="postDataDetails()" *ngIf="showAddBtn">Add Student</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
